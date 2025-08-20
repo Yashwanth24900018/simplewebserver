@@ -157,10 +157,7 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 
 ## OUTPUT:
-
-![alt text](image-1.png)
-
-![alt text](image-2.png)
+<img width="1867" height="1082" alt="image" src="https://github.com/user-attachments/assets/e4fa8171-91cc-46ff-a42f-59c0a308fa84" />
 
 
 ## RESULT:
