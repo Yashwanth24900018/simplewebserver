@@ -38,13 +38,13 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 ## PROGRAM:
 
 
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import html
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+    import html
 
-HOST, PORT = "127.0.0.1", 8000
+    HOST, PORT = "127.0.0.1", 8000
 
-# Data: TCP/IP protocol suite grouped by layer
-TCP_IP_PROTOCOLS = {
+    # Data: TCP/IP protocol suite grouped by layer
+    TCP_IP_PROTOCOLS = {
     "Application Layer": [
         "HTTP / HTTPS", "DNS", "SMTP", "IMAP", "POP3",
         "FTP", "DHCP", "SNMP", "NTP", "SSH", "Telnet",
@@ -59,16 +59,16 @@ TCP_IP_PROTOCOLS = {
     "Link (Network Access) Layer": [
         "Ethernet (IEEE 802.3)", "Wi-Fi (IEEE 802.11)", "ARP", "PPP"
     ]
-}
+    }
 
-def page(title: str, body_html: str) -> str:
+    def page(title: str, body_html: str) -> str:
     return f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{html.escape(title)}</title>
-  <style>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{html.escape(title)}</title>
+    <style>
     :root {{ font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }}
     body {{ margin: 0; background: #f7f7fb; color: #1f2937; }}
     header {{ background: #111827; color: white; padding: 1rem 1.25rem; }}
@@ -83,24 +83,24 @@ def page(title: str, body_html: str) -> str:
     footer {{ text-align:center; color:#6b7280; padding: 2rem 1rem; font-size: .9rem; }}
     .btn {{ display:inline-block; padding:.6rem .9rem; border-radius:10px; background:#111827; color:#fff; text-decoration:none; }}
     .muted {{ color:#6b7280; }}
-  </style>
-</head>
-<body>
-  <header>
+      </style>
+    </head>
+    <body>
+      <header>
     <h1>Mini Web Server Demo</h1>
     <nav>
       <a href="/">Home</a>
       <a href="/protocols">TCP/IP Protocols</a>
     </nav>
-  </header>
-  <main>
+        </header>
+      <main>
     {body_html}
-  </main>
-  <footer>Running on http://{HOST}:{PORT}</footer>
-</body>
-</html>"""
+        </main>
+      <footer>Running on http://{HOST}:{PORT}</footer>
+    </body>
+    </html>"""
 
-def home_page():
+    def home_page():
     return page(
         "Home",
         """
@@ -114,7 +114,7 @@ def home_page():
         """
     )
 
-def protocols_page():
+    def protocols_page():
     # Build a nice grid of layers and protocols
     sections = []
     for layer, protos in TCP_IP_PROTOCOLS.items():
@@ -132,7 +132,7 @@ def protocols_page():
     """
     return page("TCP/IP Protocol Suite", body)
 
-class Handler(BaseHTTPRequestHandler):
+    class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/" or self.path == "/index.html":
             content = home_page().encode("utf-8")
@@ -150,7 +150,7 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(content)
 
-if __name__ == "__main__":
+    if __name__ == "__main__":
     print(f"Serving on http://{HOST}:{PORT} (Ctrl+C to stop)")
     HTTPServer((HOST, PORT), Handler).serve_forever()
 
